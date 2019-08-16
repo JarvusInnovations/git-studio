@@ -106,6 +106,11 @@ export HISTFILE="/hab/cache/.bash_history"
 history -c
 
 
+## expand environment compatibility
+export SSL_CERT_FILE=$(hab pkg path core/cacerts)/ssl/cert.pem
+hab pkg binlink core/openssh
+
+
 ## all done, print welcome
 STUDIO_PRETTY_FORMAT='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 echo
