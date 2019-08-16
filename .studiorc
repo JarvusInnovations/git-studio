@@ -1,0 +1,3 @@
+#!/bin/bash
+hab pkg install jarvus/git-studio
+source "$(hab pkg path jarvus/git-studio)/studio.sh"
