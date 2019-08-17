@@ -90,9 +90,10 @@ _studio_install_prompt() {
     pushd "${HOME}" > /dev/null
     if [ -n "$(git status --porcelain)" ]; then
         git add --all
-        git commit -m "⚡ $(history | tac | cut -c 8-)"
-        history -a
-        history -c
+        if git commit -m "⚡ $(history | tac | cut -c 8-)"; then
+            history -a
+            history -c
+        fi
     fi
     popd > /dev/null
 
