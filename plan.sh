@@ -1,6 +1,6 @@
 pkg_name=git-studio
 pkg_origin=jarvus
-pkg_version="0.4.0"
+pkg_version="0.5.0"
 pkg_maintainer="Chris Alfano <chris@jarv.us>"
 pkg_license=("MIT")
 pkg_deps=(
