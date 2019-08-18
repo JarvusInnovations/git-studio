@@ -116,6 +116,11 @@ hab pkg binlink core/openssh
 STUDIO_PRETTY_FORMAT='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 echo
 echo "Studio ready! Recent commits:"
-git -c color.ui=always log --graph --pretty=format:"${STUDIO_PRETTY_FORMAT}" --abbrev-commit | sed 's/^/  /'
+git -c color.ui=always log \
+  --pretty=format:"${STUDIO_PRETTY_FORMAT}" \
+  --abbrev-commit \
+  --max-count=5 \
+  --reverse \
+  | sed 's/^/  /'
 echo
 echo
