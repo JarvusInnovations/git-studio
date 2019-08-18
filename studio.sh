@@ -90,20 +90,23 @@ _studio_install_prompt() {
     pushd "${HOME}" > /dev/null
     if [ -n "$(git status --porcelain)" ]; then
         git add --all
-
-        _COMMIT_HISTORY="$(history | cut -c 8-)"
-        _COMMIT_HEADLINE="${_COMMIT_HISTORY##*$'\n'}"
-
-        if git commit -m "shell: ${_COMMIT_HEADLINE}" -m $'```\n'"${_COMMIT_HISTORY}"$'\n```'; then
-            history -a
-            history -c
-        fi
+        commit-history
     fi
     popd > /dev/null
 
     STUDIO_HEAD="$(git rev-parse --short HEAD)"
 }
 PROMPT_COMMAND="_studio_install_prompt"
+
+commit-history() {
+    _COMMIT_HISTORY="$(history | cut -c 8- | grep -v '^commit-history')"
+    _COMMIT_HEADLINE="${_COMMIT_HISTORY##*$'\n'}"
+
+    if git commit --allow-empty -m "shell: ${_COMMIT_HEADLINE}" -m $'```\n'"${_COMMIT_HISTORY}"$'\n```'; then
+        history -a
+        history -c
+    fi
+}
 
 
 ## configure shell history
