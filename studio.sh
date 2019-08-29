@@ -31,7 +31,7 @@ hab pkg binlink core/git
 
 STUDIO_HEAD="$(git rev-parse --verify HEAD^{commit} 2>/dev/null )"
 test -z "${STUDIO_HEAD}" && _error_exit "No git HEAD detected, ensure the studio is launched within an initialized git repository with at least one commit"
-test -z "$(git status --porcelain)" || _error_exit "You have uncommited changes, commit or clear any changes and start the studio in a clean working tree"
+test -z "$(git status --porcelainm --ignore-submodules)" || _error_exit "You have uncommited changes, commit or clear any changes and start the studio in a clean working tree"
 
 
 ## configure git environment
@@ -88,7 +88,7 @@ _studio_install_prompt() {
     fi
 
     pushd "${HOME}" > /dev/null
-    if [ -n "$(git status --porcelain)" ]; then
+    if [ -n "$(git status --porcelain --ignore-submodules)" ]; then
         git add --all
         commit-history
     fi
